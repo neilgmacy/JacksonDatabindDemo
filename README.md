@@ -2,7 +2,7 @@
 
 This recipe shows how to use [Jackson][jackson] in an Android app to parse a JSON response from a server.
 
-[![Build Status](https://img.shields.io/travis/neilmcguiggan/JSONDemoApp.svg)](https://travis-ci.org/neilmcguiggan/JSONDemoApp)
+[![Build Status](https://img.shields.io/travis/neilmcguiggan/jackson_databind_demo.svg)](https://travis-ci.org/neilmcguiggan/jackson_databind_demo)
 
 ## Add dependencies
 

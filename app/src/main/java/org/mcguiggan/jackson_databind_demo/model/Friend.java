@@ -1,4 +1,4 @@
-package org.mcguiggan.jsondemoapp.model;
+package org.mcguiggan.jackson_databind_demo.model;
 
 /**
  * A friend from the social data.

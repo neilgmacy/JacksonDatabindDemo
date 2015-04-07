@@ -1,12 +1,12 @@
-package org.mcguiggan.jsondemoapp.ui;
+package org.mcguiggan.jackson_databind_demo.ui;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import org.mcguiggan.jsondemoapp.R;
-import org.mcguiggan.jsondemoapp.data.UserManager;
-import org.mcguiggan.jsondemoapp.model.User;
+import org.mcguiggan.jackson_databind_demo.R;
+import org.mcguiggan.jackson_databind_demo.data.UserManager;
+import org.mcguiggan.jackson_databind_demo.model.User;
 
 import java.util.List;
 

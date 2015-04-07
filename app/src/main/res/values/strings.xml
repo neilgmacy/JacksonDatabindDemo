@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JSONDemoApp</string>
+    <string name="app_name">jackson_databind_demo</string>
 
     <string name="hello_world">Hello Jackson!</string>
 </resources>

@@ -1,10 +1,10 @@
-package org.mcguiggan.jsondemoapp.data;
+package org.mcguiggan.jackson_databind_demo.data;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
-import org.mcguiggan.jsondemoapp.model.Friend;
-import org.mcguiggan.jsondemoapp.model.User;
+import org.mcguiggan.jackson_databind_demo.model.Friend;
+import org.mcguiggan.jackson_databind_demo.model.User;
 
 import java.io.IOException;
 import java.util.ArrayList;

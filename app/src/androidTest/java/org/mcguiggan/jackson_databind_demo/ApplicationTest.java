@@ -1,4 +1,4 @@
-package org.mcguiggan.jsondemoapp;
+package org.mcguiggan.jackson_databind_demo;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,4 +1,4 @@
-package org.mcguiggan.jsondemoapp.data;
+package org.mcguiggan.jackson_databind_demo.data;
 
 import android.util.Log;
 
@@ -7,8 +7,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
-import org.mcguiggan.jsondemoapp.BuildConfig;
-import org.mcguiggan.jsondemoapp.model.User;
+import org.mcguiggan.jackson_databind_demo.BuildConfig;
+import org.mcguiggan.jackson_databind_demo.model.User;
 
 import java.io.IOException;
 import java.util.List;
