@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Parsing JSON in Android Using Jackson
 
 This recipe shows how to use [Jackson][jackson] in an Android app to parse a JSON response from a server.
@@ -111,3 +112,7 @@ And that's it! We now have a fully parsed model object, built from the JSON that
 [callbacks]: http://developer.android.com/training/basics/fragments/communicating.html "Communicating with Other Fragments"
 [jsonparser]: https://github.com/FasterXML/jackson-core/blob/master/src/main/java/com/fasterxml/jackson/core/JsonParser.java "JsonParser.java"
 [jsontokens]: https://github.com/FasterXML/jackson-core/blob/master/src/main/java/com/fasterxml/jackson/core/JsonToken.java "JsonToken.java"
+=======
+# JacksonDatabindDemo
+A simple app demonstrating how to use the Jackson Databind library.
+>>>>>>> 0a0037c3444c6452adebf16fd5534c5417f1aa67
