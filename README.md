@@ -1,13 +1,13 @@
 # JacksonDatabindDemo
 A simple app demonstrating how to use the Jackson Databind library rather than doing all of the parsing yourself.
 
-This recipe shows how to use the [Jackson Databind][jackson-databind] library in an Android app to parse a JSON response from a server.
+This recipe shows how to use the [Jackson Databind][jackson-databind] library in an Android app to parse a JSON response from a server. I [previously][jsondemoapp] showed how you can use Jackson to manually parse your JSON, but there's an even easier way.
 
 [![Build Status](https://img.shields.io/travis/neilmcguiggan/jackson_databind_demo.svg)](https://travis-ci.org/neilmcguiggan/jackson_databind_demo)
 
 ## Add Dependencies
 
-The first step in using Jackson is to import the libraries from Maven Central. I'm just using the [core][jackson-core] library, the [databind][jackson-databind] library for binding JSON to Java objects, and the [annotations][jackson-annotations] library containing the core annotations for Jackson.
+The first step in using Jackson is to import the libraries from Maven Central. I'm using the [core][jackson-core] library, the [databind][jackson-databind] library for binding JSON to Java objects, and the [annotations][jackson-annotations] library containing the core annotations for Jackson.
 
 I'm using [OkHttp][okhttp] for networking, so include that too if you want to follow this tutorial exactly.
 
@@ -56,9 +56,10 @@ public void onUserDataLoaded(List<User> userList) {
 
 ## The Model Classes
 
-Create a POJO for each model object that you want to map to a JSON object. In this project these are 
+Create a POJO for each model object that you want to map to a JSON object. In this project these are `User` and `Friend`.
 
 Each property in the class will be mapped to a JSON property:
+
 ```
 private String mId;
 
@@ -89,10 +90,11 @@ User[] userList = objectMapper.readValue(responseBytes, User[].class);
 listener.onUserDataLoaded(Arrays.asList(userList));
 ```
 
+All we have to do is pass the bytes of the response, or even simply a String version of the response, to the `ObjectMapper` instance and it will map it to an instance of the `Class` that you pass in as the second parameter. In this case, it's an array rather than a single object, but you can pass arrays in too.
 
+And that's it! We now have a fully parsed array of users, built from the JSON that was received from the server.
 
-And that's it! We now have a fully parsed model object, built from the JSON that was received from the server.
-
+[jsondemoapp]: https://github.com/neilmcguiggan/JSONDemoApp "GitHub: neilmcguiggan/JSONDemoApp"
 [jackson]: https://github.com/FasterXML/jackson "GitHub: FasterXML/jackson"
 [jackson-core]: https://github.com/FasterXML/jackson-core "GitHub: FasterXML/jackson-core"
 [jackson-databind]: https://github.com/FasterXML/jackson-databind "GitHub: FasterXML/jackson-databind"
@@ -101,4 +103,3 @@ And that's it! We now have a fully parsed model object, built from the JSON that
 [callbacks]: http://developer.android.com/training/basics/fragments/communicating.html "Communicating with Other Fragments"
 [jsonparser]: https://github.com/FasterXML/jackson-core/blob/master/src/main/java/com/fasterxml/jackson/core/JsonParser.java "JsonParser.java"
 [jsontokens]: https://github.com/FasterXML/jackson-core/blob/master/src/main/java/com/fasterxml/jackson/core/JsonToken.java "JsonToken.java"
-=======
