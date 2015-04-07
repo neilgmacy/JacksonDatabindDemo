@@ -1,10 +1,14 @@
 package org.mcguiggan.jackson_databind_demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 /**
  * A user from the social data.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     private String mId;
@@ -14,6 +18,7 @@ public class User {
     private String mAbout;
     private List<Friend> mFriends;
 
+    @JsonProperty("_id")
     public String getId() {
         return mId;
     }
@@ -22,6 +27,7 @@ public class User {
         mId = id;
     }
 
+    @JsonProperty("picture")
     public String getPictureUrl() {
         return mPictureUrl;
     }
@@ -30,6 +36,7 @@ public class User {
         mPictureUrl = pictureUrl;
     }
 
+    @JsonProperty("email")
     public String getEmail() {
         return mEmail;
     }
@@ -38,6 +45,7 @@ public class User {
         mEmail = email;
     }
 
+    @JsonProperty("phone")
     public String getPhoneNumber() {
         return mPhoneNumber;
     }
@@ -46,6 +54,7 @@ public class User {
         mPhoneNumber = phoneNumber;
     }
 
+    @JsonProperty("about")
     public String getAbout() {
         return mAbout;
     }
@@ -54,6 +63,7 @@ public class User {
         mAbout = about;
     }
 
+    @JsonProperty("friends")
     public List<Friend> getFriends() {
         return mFriends;
     }

@@ -2,6 +2,8 @@ package org.mcguiggan.jackson_databind_demo.data;
 
 import android.util.Log;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -11,6 +13,8 @@ import org.mcguiggan.jackson_databind_demo.BuildConfig;
 import org.mcguiggan.jackson_databind_demo.model.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -73,10 +77,10 @@ public class UserManager {
 
                 if (listener != null) {
                     Log.d(TAG, "Loaded from server");
-                    String responseString = response.body().string();
-                    Log.d(TAG, responseString);
-                    List<User> userList = UserDataParser.parseUsersJson(responseString);
-                    listener.onUserDataLoaded(userList);
+                    final byte[] responseBytes = response.body().bytes();
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    User[] userList = objectMapper.readValue(responseBytes, User[].class);
+                    listener.onUserDataLoaded(Arrays.asList(userList));
                 }
             }
         });
