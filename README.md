@@ -101,5 +101,3 @@ And that's it! We now have a fully parsed array of users, built from the JSON th
 [jackson-annotations]: https://github.com/FasterXML/jackson-annotations "GitHub: FasterXML/jackson-annotations"
 [okhttp]: http://square.github.io/okhttp/ "OkHttp"
 [callbacks]: http://developer.android.com/training/basics/fragments/communicating.html "Communicating with Other Fragments"
-[jsonparser]: https://github.com/FasterXML/jackson-core/blob/master/src/main/java/com/fasterxml/jackson/core/JsonParser.java "JsonParser.java"
-[jsontokens]: https://github.com/FasterXML/jackson-core/blob/master/src/main/java/com/fasterxml/jackson/core/JsonToken.java "JsonToken.java"
