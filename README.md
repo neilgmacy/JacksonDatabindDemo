@@ -1,13 +1,13 @@
-<<<<<<< HEAD
-# Parsing JSON in Android Using Jackson
+# JacksonDatabindDemo
+A simple app demonstrating how to use the Jackson Databind library rather than doing all of the parsing yourself.
 
-This recipe shows how to use [Jackson][jackson] in an Android app to parse a JSON response from a server.
+This recipe shows how to use the [Jackson Databind][jackson-databind] library in an Android app to parse a JSON response from a server.
 
 [![Build Status](https://img.shields.io/travis/neilmcguiggan/jackson_databind_demo.svg)](https://travis-ci.org/neilmcguiggan/jackson_databind_demo)
 
-## Add dependencies
+## Add Dependencies
 
-The first step in using Jackson is to import the libraries from Maven Central. I'm just using the [core][jackson-core] library here as there's nothing especially complicated involved, but the other main ones are the [databind][jackson-databind] library for binding JSON to Java objects, and the [annotations][jackson-annotations] library containing the core annotations for Jackson.
+The first step in using Jackson is to import the libraries from Maven Central. I'm just using the [core][jackson-core] library, the [databind][jackson-databind] library for binding JSON to Java objects, and the [annotations][jackson-annotations] library containing the core annotations for Jackson.
 
 I'm using [OkHttp][okhttp] for networking, so include that too if you want to follow this tutorial exactly.
 
@@ -17,9 +17,11 @@ compile 'com.fasterxml.jackson.core:jackson-core:2.5.1'
 
 //okhttp client for network requests
 compile 'com.squareup.okhttp:okhttp:2.3.0'
+compile 'com.fasterxml.jackson.core:jackson-databind:2.5.1'
+compile 'com.fasterxml.jackson.core:jackson-annotations:2.5.1'
 ```
 
-## Make the request
+## Make The Request
 
 From whichever class requires the data, make an asynchronous request to the Data Manager class, in this case `UserManager`:
 
@@ -52,55 +54,42 @@ public void onUserDataLoaded(List<User> userList) {
 }
 ```
 
-## Data Manager class
+## The Model Classes
 
-If you've used OkHttp before, the `requestUsers` method should be really easy to understand. Thankfully, even if you've not used OkHttp before, it should be easy to understand as it's a really clear API. The interesting part in this tutorial is here:
+Create a POJO for each model object that you want to map to a JSON object. In this project these are 
 
+Each property in the class will be mapped to a JSON property:
 ```
-List<User> userList = UserDataParser.parseUsersJson(responseString);
-listener.onUserDataLoaded(userList);
-```
+private String mId;
 
-The first line sends the String version of the JSON response to the UserDataParser, getting a List of User objects back. The second line then sends it back to the `listener` object who made the request in the first place. This completes the asynchronous request.
+@JsonProperty("_id")
+public String getId() {
+    return mId;
+}
 
-## Data Parser class
-
-This is the key part of this example project: how to parse the JSON data using Jackson.
-
-The main class used from Jackson is the [JsonParser][jsonparser]. Creating the `JsonParser` is very straightforward, just pass the String of JSON data into the `createParser` method of `JsonFactory`.
-
-```
-JsonParser parser = new JsonFactory().createParser(jsonString);
-```
-
-The parser works by breaking the JSON down into [JsonTokens][jsontokens]. This represents key elements like the start or end of an array or object, fields, and values. The approach taken here is to iterate over the tokens, until we reach the end:
-
-```
-while (parser.nextToken() != JsonToken.END_ARRAY) {
-    User parsedUser = parseUserJson(parser);
-    userList.add(parsedUser);
+public void setId(String id) {
+    mId = id;
 }
 ```
 
-In this case, I'm parsing an array of user objects, so the last token I should receive is an `END_ARRAY` token.
+The `@JsonProperty` annotation can be placed next to the field declaration, the getter or the setter. If your field name and the JSON field name are the same, you don't need the annotation as it'll be derived by Jackson.
 
-There is a sub-loop in the `parseUserJson` method which iterates over each token in the `user` object. This is where I look at the keys and values in the JSON. `parser.getCurrentName();` will get the name of the field it's currently pointing at. The parser then moves on to the next token, the value. Using a switch statement to define each of the keys we're interested in, the value can then be passed into a User model object. And if the key isn't one that we're interested in, we can tell the parser to skip all children of this key and move on to the next key. This means we don't have to waste time or resources on every field that we're not interested in.
+If you don't want to use every value in the JSON, use need to annotate the class with `@JsonIgnoreProperties(ignoreUnknown = true)`. This tells the JSON parser to ignore everything that you don't specifically ask to be mapped.
+
+## The Data Manager Class
+
+If you've used OkHttp before, the `requestUsers` method should be really easy to understand. Thankfully, even if you've not used OkHttp before, it should be easy to understand as it's a really clear API.
+
+The interesting part in this tutorial is here, in the response callback:
 
 ```
-while (parser.nextToken() != JsonToken.END_OBJECT) {
-    String fieldName = parser.getCurrentName();
-    parser.nextToken(); //we've read the field's name, lets move the parser on to the value now.
-    switch (fieldName) {
-        case "_id":
-            user.setId(parser.getValueAsString());
-            break;
-        ...
-        default:
-            parser.skipChildren(); //We're not interested in this value, or any children of this value.
-            break;
-    }
-}
+final byte[] responseBytes = response.body().bytes();
+ObjectMapper objectMapper = new ObjectMapper();
+User[] userList = objectMapper.readValue(responseBytes, User[].class);
+listener.onUserDataLoaded(Arrays.asList(userList));
 ```
+
+
 
 And that's it! We now have a fully parsed model object, built from the JSON that was received from the server.
 
@@ -113,6 +102,3 @@ And that's it! We now have a fully parsed model object, built from the JSON that
 [jsonparser]: https://github.com/FasterXML/jackson-core/blob/master/src/main/java/com/fasterxml/jackson/core/JsonParser.java "JsonParser.java"
 [jsontokens]: https://github.com/FasterXML/jackson-core/blob/master/src/main/java/com/fasterxml/jackson/core/JsonToken.java "JsonToken.java"
 =======
-# JacksonDatabindDemo
-A simple app demonstrating how to use the Jackson Databind library.
->>>>>>> 0a0037c3444c6452adebf16fd5534c5417f1aa67
